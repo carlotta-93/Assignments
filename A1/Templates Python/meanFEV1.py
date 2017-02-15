@@ -3,7 +3,8 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import plotly.plotly as py
+import plotly
+import plotly.graph_objs as go
 # load of data
 data_matrix = np.loadtxt('smoking.txt')
 
@@ -21,7 +22,13 @@ def mean_fev_one(data):
     plt.ylabel('FEV1 values')
     plt.title('FEV1 average values for smokers and non-smokers')
     plt.show()
-    plot_url = py.plot_mpl(fig)
+    trace0 = go.Box(y=smokers[:, 1], name='smokers')
+    trace1 = go.Box(y=non_smokers[:, 1], name='non smokers')
+    data = [trace0, trace1]
+    layout = go.Layout(yaxis=dict(title='FEV1 values',zeroline=False))
+    fig = go.Figure(data=data, layout=layout)
+    plotly.offline.plot(fig)
+
     return avg_smokers, avg_non_smokers
 
 print "The average FEV1 values for smoker and non smoker are: " + str(mean_fev_one(data_matrix))
