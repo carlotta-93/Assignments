@@ -17,7 +17,7 @@ def mean_fev_one(data):
     smokers = data[data[:, 4] == 1]
     avg_smokers = np.mean(smokers[:, 1])
     avg_non_smokers = np.mean(non_smokers[:, 1])
-    trace0 = go.Box(y=smokers[:, 1], name='smokers')
+    trace0 = go.Box(y=smokers[:, 1], name='smokers', marker=dict(color='rgb(153, 153, 255)'))
     trace1 = go.Box(y=non_smokers[:, 1], name='non smokers')
     data = [trace0, trace1]
     layout = go.Layout(yaxis=dict(title='FEV1 values', zeroline=False), title='FEV1 value for smokers and non-smokers')
@@ -26,5 +26,5 @@ def mean_fev_one(data):
 
     return avg_smokers, avg_non_smokers
 
-print "The average FEV1 values for smoker and non smoker are: " + str(mean_fev_one(data_matrix))
+print "The average FEV1 values for smoker and non-smoker subjects are: " + str(mean_fev_one(data_matrix))
 

@@ -12,8 +12,10 @@ def hyp_test(data):
     non_smokers = data[data[:, 4] == 0]
     smokers = data[data[:, 4] == 1]
     significance_level = 0.05
+
     # the two population variances are not assumed to be equal
     result_values = scipy.stats.ttest_ind(smokers[:, 1], non_smokers[:, 1], equal_var=False)
+
     # p value computed using the formula from the slides
     smoker_mean = np.mean(smokers[:, 1])
     non_smoker_mean = np.mean(non_smokers[:, 1])
@@ -22,16 +24,21 @@ def hyp_test(data):
     smk_len = len(smokers[:, 1])
     nsmoker_len = len(non_smokers[:, 1])
     t_value = (smoker_mean - non_smoker_mean) / np.sqrt((sv_smoker / smk_len) + (sv_nsmoker / nsmoker_len))
+
     print 'The t value computed manually is: ' + str(t_value)
     print 'The t value computed with the built in formula is: ' + str(result_values[0])
+
     degrees_of_freedom = np.floor((((sv_smoker / smk_len) + (sv_nsmoker / nsmoker_len)) ** 2) /
                                   ((sv_smoker ** 2 / (smk_len ** 2 * (smk_len - 1))) + (
                                       sv_nsmoker ** 2 / (nsmoker_len ** 2 * (nsmoker_len - 1)))))
 
     print 'Degrees of freedom: ' + str(degrees_of_freedom)
+
+    # computation of p value
     p = 2 * scipy.stats.t.cdf(-t_value, degrees_of_freedom)
     print "The p value computed manually is: " + str(p)
     print "The p value computed with the built-in formula is: " + str(result_values[1])
+
     if result_values[1] < significance_level:
         return True  # null hypothesis is rejected
     else:
