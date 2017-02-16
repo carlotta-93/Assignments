@@ -3,7 +3,6 @@
 
 import numpy as np
 import scipy.stats
-import matplotlib.pyplot as plt
 import plotly as py
 import plotly.graph_objs as go
 
@@ -53,22 +52,39 @@ trace_non_smokers = go.Scatter(x=non_sm_ages, y=non_sm_fev1, mode='markers',
                                marker=dict(size=7, color='rgba(255, 178, 102, .8)', line=dict(width=.4)),
                                name='non smokers')
 
-layout = go.Layout(title='Fev1 values and ages',
+layout = go.Layout(title='Fev1 values over age of subjects for smokers and non-smokers',
                    xaxis=dict(title='ages', gridwidth=2),
                    yaxis=dict(title='FEV1 values', gridwidth=2),
                    plot_bgcolor='rgb(224, 224, 224)'
                    )
-fig = dict(data=[trace_non_smokers, trace_smokers], layout=layout)
+fig = go.Figure(data=[trace_non_smokers, trace_smokers], layout=layout)
 py.offline.plot(fig)
 
 # histograms in exercise 5
+his_smoker = go.Histogram(x=smokers[:, 0],
+                          marker=dict(color='rgb(153, 153, 255)'),
+                          xbins=dict(size=1),
+                          name='smokers')
 
-n, bins, patches = plt.hist(non_smokers[:, 0], 30, alpha=0.9, facecolor='orange', label='age of non smokers')
-n, bins, patches = plt.hist(smokers[:, 0], 30, alpha=0.8, facecolor='purple', label='age of smokers')
+his_non_smoker = go.Histogram(x=non_smokers[:, 0],
+                              marker=dict(color='rgb(255, 178, 102)'),
+                              xbins=dict(size=1),
+                              name='non-smokers')
 
-plt.xlabel('age')
-plt.ylabel('Frequency')
-plt.title('histogram over the age of subjects')
-plt.legend(loc='upper right')
-plt.grid(True)
-plt.show()
+layout_his = go.Layout(title='histogram over the age of subjects',
+                       xaxis=dict(title='ages'),
+                       yaxis=dict(title='frequency'),
+                       bargap=0.3,
+                       bargroupgap=0.3
+                       )
+data_overlap_hist = [his_smoker, his_non_smoker]
+data_his_smoker = [his_smoker]
+data_his_non_smoker = [his_non_smoker]
+histograms = go.Figure(data=data_overlap_hist, layout=layout_his)
+smoker_his = go.Figure(data=data_his_smoker, layout=layout_his)
+non_smoker_his = go.Figure(data=data_his_non_smoker, layout=layout_his)
+
+# uncomment these lines to make the plots
+# py.offline.plot(histograms)
+# py.offline.plot(smoker_his)
+# py.offline.plot(non_smoker_his)
