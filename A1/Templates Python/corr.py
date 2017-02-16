@@ -4,7 +4,7 @@
 import numpy as np
 import scipy.stats
 import matplotlib.pyplot as plt
-import plotly
+import plotly as py
 import plotly.graph_objs as go
 
 data_matrix = np.loadtxt('smoking.txt')
@@ -15,62 +15,39 @@ fev1_values = data[:, 1]
 
 
 def corr(x, y):
+    """This function takes as arguments the values of the age and their relative FEV1 values from the data and creates a
+    scattered plot; it computes and returns the correlation value """
+
     correlation_value = scipy.stats.pearsonr(x, y)
-    plt.plot(x, y, 'bo', color='darkgreen')
-    plt.ylabel('FEV1 values')
-    plt.xlabel('ages')
-    plt.grid(True)
-    plt.show()
+    covariance_m = np.cov(x, y)
+    std_x = np.std(x)
+    std_y = np.std(y)
+    correlation = covariance_m / (std_x * std_y)
+    print 'The correlation coefficient manually computed is: ' + str(correlation[0][1])
+    trace = go.Scatter(x=x, y=y, mode='markers',
+                       marker=dict(size=7, color='rgba(153, 153, 255, .8)', line=dict(width=.4))
+                       )
+    layout = go.Layout(title='Fev1 values and ages',
+                       xaxis=dict(title='ages', gridwidth=2),
+                       yaxis=dict(title='FEV1 values', gridwidth=2),
+                       plot_bgcolor='rgb(224, 224, 224)'
+                       )
+    fig = dict(data=[trace], layout=layout)
+    py.offline.plot(fig)
     return correlation_value
 
+print "The Pearson correlation coefficient computed with the built-in formula is : " + str(corr(ages, fev1_values)[0])
 
-print "The Pearson correlation coefficient, and the p-value are: " + str(corr(ages, fev1_values))
-
+# histograms in exercise 5
 non_smokers = data[data[:, 4] == 0]
 smokers = data[data[:, 4] == 1]
 
-# n, bins, patches = plt.hist(non_smokers[:, 0], 30, alpha=0.9, facecolor='orange', label='age of non smokers')
-# n, bins, patches = plt.hist(smokers[:, 0], 30, alpha=0.8, facecolor='purple', label='ages of smokers')
-#
+n, bins, patches = plt.hist(non_smokers[:, 0], 30, alpha=0.9, facecolor='orange', label='age of non smokers')
+n, bins, patches = plt.hist(smokers[:, 0], 30, alpha=0.8, facecolor='purple', label='ages of smokers')
 
-non_smoker_his = go.Histogram(x=non_smokers[:, 0], xbins=dict(start=np.min(non_smokers[:, 0]), size=0.30, end=21),
-                              marker=dict(color='orange'))
-layout = dict(title='non-smoker ages',
-              autosize=True,
-              bargap=0.015,
-              xaxis=dict(
-                  title='non-smokers ages',
-                  autorange=True,
-                  zeroline=False),
-              yaxis=dict(
-                  title='Frequency',
-                  autorange=True,
-                  showticklabels=True,
-              ))
-
-smoker_his = go.Histogram(x=smokers[:, 0], xbins=dict(start=np.min(smokers[:, 0]), size=0.30, end=21),
-                          marker=dict(color='blue'))
-layout2 = dict(title='smoker ages',
-               autosize=True,
-               bargap=0.015,
-               xaxis=dict(
-                   title='smokers ages',
-                   autorange=True,
-                   zeroline=False),
-               yaxis=dict(
-                   title='Frequency',
-                   autorange=True,
-                   showticklabels=True,
-               ))
-
-fig = go.Figure(data=go.Data([non_smoker_his]), layout=layout)
-# fig2 = go.Figure(data=go.Data([smoker_his]), layout=layout2)
-plotly.offline.plot(fig)
-# plotly.offline.plot(fig2)
-
-# plt.xlabel('ages of smokers and non smokers')
-# plt.ylabel('Frequency')
-# plt.title('ages of smoker')
-# plt.legend(loc='upper right')
-# plt.grid(True)
-# plt.show()
+plt.xlabel('age')
+plt.ylabel('Frequency')
+plt.title('histogram over the age of subjects')
+plt.legend(loc='upper right')
+plt.grid(True)
+plt.show()
