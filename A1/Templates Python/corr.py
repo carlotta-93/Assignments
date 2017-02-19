@@ -72,7 +72,7 @@ his_non_smoker = go.Histogram(x=non_smokers[:, 0],
                               name='non-smokers')
 
 layout_his = go.Layout(title='histogram over the age of subjects',
-                       xaxis=dict(title='ages'),
+                       xaxis=dict(title='ages', dtick=1),
                        yaxis=dict(title='frequency'),
                        bargap=0.3,
                        bargroupgap=0.3
@@ -85,6 +85,6 @@ smoker_his = go.Figure(data=data_his_smoker, layout=layout_his)
 non_smoker_his = go.Figure(data=data_his_non_smoker, layout=layout_his)
 
 # uncomment these lines to make the plots
-# py.offline.plot(histograms)
+py.offline.plot(histograms)
 # py.offline.plot(smoker_his)
 # py.offline.plot(non_smoker_his)
