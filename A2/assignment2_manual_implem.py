@@ -13,16 +13,16 @@ XTrain = dataTrain[:, : -1]
 YTrain = dataTrain[:, -1]
 XTest = dataTest[:, : -1]
 YTest = dataTest[:, -1]
-
 k = 3
 
 
 def get_neigh(train_set, test_set, k_n):
+    """this function return the k-nearest neighbors"""
     distances = []
     for i in range(len(train_set)):
         for j in range(len(test_set)):
             distance = np.sqrt(np.sum(np.square(train_set[i] - test_set[j])))
-            distances.append([j, i, distance]) # test_point, train_point, distance between points
+            distances.append([j, i, distance])  # test_point, train_point, distance between points
     distances.sort(key=operator.itemgetter(0))
     sorted_list = [list(j) for i, j in groupby(distances, lambda x: x[0])]  # group by XTest points
     for elements in sorted_list:
@@ -32,15 +32,25 @@ def get_neigh(train_set, test_set, k_n):
             neighbor.append(elem[:k_n])
     return neighbor
 
-tha_list = get_neigh(XTrain, XTest, k)[0:10]
-for el in tha_list:
-    print el
-    for val in el:
-        print val[1], YTrain[val[1]]
 
-# def predict(neighbors):
-#     for neighbours in neighbors:
-#         return Counter(neighbours).most_common(1)
+def predict(neighbors):
+    """ this function predict the labels of the points """
+    predictions = []
+    for i in range(len(neighbors)):
+        label_list_predicted = [YTrain[el[1]] for el in neighbors[i]]
+        # print label_list
+        predictions.append(max(label_list_predicted, key=label_list_predicted.count))
+    return predictions
+
+
+def get_accuracy(test_label, predictions):
+    correct = 0
+    for x in range(len(test_label)):
+        if YTest[test_label[x][0][0]] == predictions[x]:
+            correct += 1
+    return (correct / float(len(test_label))) * 100.0
+
+print get_accuracy(get_neigh(XTrain, XTest, k), predict(get_neigh(XTrain, XTest, k)))
 
 # for el in tha_list:
 #     print el
