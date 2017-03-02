@@ -50,6 +50,7 @@ c_error_val = 1
 
 
 def perform_cross_validation(klist, kval, cval, x_train, y_train):
+    """perform cross validation, returns best k value and it's classification error"""
     for k in klist:
         clf_cross_validation = KNeighborsClassifier(k, weights='distance')
         # hyperparameter selection using cross-validation
@@ -57,7 +58,9 @@ def perform_cross_validation(klist, kval, cval, x_train, y_train):
         # loop over CV folds
         for train, test in cv_cross_validation.split(x_train):
             XTrainCV, XTestCV, YTrainCV, YTestCV = x_train[train], x_train[test], y_train[train], y_train[test]
+        # fit the model on the new sets
         clf_cross_validation.fit(XTrainCV, YTrainCV)
+        # compute the classification error
         classification_error = zero_one_loss(YTestCV, clf_cross_validation.predict(XTestCV))
         if classification_error < cval:
             cval = classification_error
@@ -86,11 +89,13 @@ scaler = preprocessing.StandardScaler().fit(XTrain)
 XTrainN = scaler.transform(XTrain)
 XTestN = scaler.transform(XTest)
 
+# perform cross validation
 k_best_found_normalized = perform_cross_validation(k_list, k_best_val, c_error_val, XTrainN, YTrain)[0]
 class_error_found_normalized = perform_cross_validation(k_list, k_best_val, c_error_val, XTrainN, YTrain)[1]
 print 'The best k found in cross validation procedure is %d with classification error of %.10f' \
       % (k_best_found_normalized, class_error_found_normalized)
 
+# fit the model
 clfN = KNeighborsClassifier(k_best_found_normalized, weights='distance')
 clfN.fit(XTrainN, YTrain)
 

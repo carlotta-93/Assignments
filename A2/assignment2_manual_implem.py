@@ -13,7 +13,7 @@ XTrain = dataTrain[:, : -1]
 YTrain = dataTrain[:, -1]
 XTest = dataTest[:, : -1]
 YTest = dataTest[:, -1]
-k = 3
+m = 1
 
 
 def get_neigh(train_set, test_set, k_n):
@@ -33,55 +33,91 @@ def get_neigh(train_set, test_set, k_n):
     return neighbor
 
 
-def predict(neighbors):
-    """ this function predict the labels of the points """
+def predict(neighbors, y_train):
+    """this function predict the labels of the points in the XTest set"""
     predictions = []
     for i in range(len(neighbors)):
-        label_list_predicted = [YTrain[el[1]] for el in neighbors[i]]
+        label_list_predicted = [y_train[el[1]] for el in neighbors[i]]
         # print label_list
         predictions.append(max(label_list_predicted, key=label_list_predicted.count))
     return predictions
 
 
-def get_accuracy(test_label, predictions):
+def get_accuracy(test_label, predictions, y_test):
+    """this function get the accuracy score of the predictions against the real values in the YTest set"""
     correct = 0
     for x in range(len(test_label)):
-        if YTest[test_label[x][0][0]] == predictions[x]:
+        if y_test[test_label[x][0][0]] == predictions[x]:
             correct += 1
-    return (correct / float(len(test_label))) * 100.0
+    return correct / float(len(test_label))
 
-print get_accuracy(get_neigh(XTrain, XTest, k), predict(get_neigh(XTrain, XTest, k)))
+# EXERCISE 2
+k_list = [i for i in range(0, 26) if i % 2 != 0]
+k_best_val = 0
+c_error_val = 1
+num_folds = 5
 
-# for el in tha_list:
-#     print el
 
-# def getResponse(neighbors):
-#     classVotes = {}
-#     for x in range(len(neighbors)):
-#         response = neighbors[x]
-#         if response in classVotes:
-#             classVotes[response] += 1
-#         else:
-#             classVotes[response] = 1
-#     sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
-#     return sortedVotes[0][0]
-#
-#
-# def getAccuracy(testSet, predictions):
-#     correct = 0
-#     for x in range(len(testSet)):
-#         if testSet[x] == predictions[x]:
-#             correct += 1
-#     return (correct / float(len(testSet))) * 100.0
-#
-# predictions=[]
-#
-#
-# neighbors = get_neigh(XTrain, XTest, k)
-# result = getResponse(neighbors)
-# predictions.append(result)
-# print('> predicted=' + repr(result) + ', actual=' + repr(YTest))
-# accuracy = getAccuracy(YTest, predictions)
-# print('Accuracy: ' + repr(accuracy) + '%')
-# #
-# #
+def cross_validation(n_splits, x_train, y_train, klist, kval, cval,):
+    """this function perform cross validation and returns the best k value found with its classification error"""
+    subset_size = len(x_train) / n_splits
+    for k in klist:
+        # split the data
+        for n in range(num_folds):
+            x_test_cv = x_train[n * subset_size: n * subset_size + subset_size]
+            y_test_cv = y_train[n * subset_size:n * subset_size + subset_size]
+            x_train_cv = list(x_train[:n * subset_size]) + list(x_train[(n + 1) * subset_size:])
+            y_train_cv = np.append(y_train[:n * subset_size], y_train[(n + 1) * subset_size:])
+            neighbors = get_neigh(x_train_cv, x_test_cv, k)
+            predicted = predict(neighbors, y_train_cv)
+            # print get_accuracy(neighbors, predicted, y_test_cv)
+            classification_error = 1 - get_accuracy(neighbors, predicted, y_test_cv)
+        if classification_error < cval:
+            cval = classification_error
+            kval = k
+        print 'With %d clusters, the classification error is %.10f' % (k, classification_error)
+    return kval, cval
+
+
+def main():
+    """This is where everything begins, your worst nightmares"""
+    # EXERCISE 1
+    neighbors = get_neigh(XTrain, XTest, m)
+    predictions = predict(neighbors, YTrain)
+    accuracy = get_accuracy(neighbors, predictions, YTest)
+    print 'The accuracy score of the classifier on the test set, with k=1 is: ' + str(accuracy)
+    # k_best_found = cross_validation(num_folds, XTrain, YTrain, k_list, k_best_val, c_error_val)[0]
+    # class_error_found = cross_validation(num_folds, XTrain, YTrain, k_list, k_best_val, c_error_val)[1]
+    # print 'The best k is %d with classification error of %.10f' % (k_best_found, class_error_found)
+
+    # EXERCISE 3
+    k_best = 3
+    neighbors_k_best = get_neigh(XTrain, XTest, k_best)
+    predictions_k_best = predict(neighbors_k_best, YTrain)
+    accuracy_k_best = get_accuracy(neighbors_k_best, predictions_k_best, YTest)
+    print 'The accuracy score of classifier on the test set, with k_best=3 is: ' + str(accuracy_k_best)
+
+    # EXERCISE 4 - normalization
+    mean_XTest = np.mean(XTest, axis=0)
+    mean_XTrain = np.mean(XTrain, axis=0)
+    centered_x_test = XTest - mean_XTest
+    centered_x_train = XTrain - mean_XTrain
+    normalized_xtrain = centered_x_train.std(axis=1)
+    normalized_xtest = centered_x_test.std(axis=1)
+    print len(normalized_xtrain)
+    print len(normalized_xtest)
+
+    neighbors_k_best_n = get_neigh(normalized_xtrain, normalized_xtest, k_best)
+    predictions_k_best_n = predict(neighbors_k_best_n, YTrain)
+    accuracy_k_best_n = get_accuracy(neighbors_k_best_n, predictions_k_best_n, YTest)
+    print 'The accuracy score of classifier on the test set, with k_best=3 is: ' + str(accuracy_k_best_n)
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    main()
