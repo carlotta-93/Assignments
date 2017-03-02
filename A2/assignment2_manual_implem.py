@@ -13,7 +13,6 @@ XTrain = dataTrain[:, : -1]
 YTrain = dataTrain[:, -1]
 XTest = dataTest[:, : -1]
 YTest = dataTest[:, -1]
-m = 1
 
 
 def get_neigh(train_set, test_set, k_n):
@@ -67,11 +66,11 @@ def cross_validation(n_splits, x_train, y_train, klist, kval, cval,):
             x_test_cv = x_train[n * subset_size: n * subset_size + subset_size]
             y_test_cv = y_train[n * subset_size:n * subset_size + subset_size]
             x_train_cv = list(x_train[:n * subset_size]) + list(x_train[(n + 1) * subset_size:])
-            y_train_cv = np.append(y_train[:n * subset_size], y_train[(n + 1) * subset_size:])
+            y_train_cv = list(y_train[:n * subset_size]) + list(y_train[(n + 1) * subset_size:])
             neighbors = get_neigh(x_train_cv, x_test_cv, k)
             predicted = predict(neighbors, y_train_cv)
             # print get_accuracy(neighbors, predicted, y_test_cv)
-            classification_error = 1 - get_accuracy(neighbors, predicted, y_test_cv)
+        classification_error = 1 - get_accuracy(neighbors, predicted, y_test_cv)
         if classification_error < cval:
             cval = classification_error
             kval = k
@@ -82,41 +81,46 @@ def cross_validation(n_splits, x_train, y_train, klist, kval, cval,):
 def main():
     """This is where everything begins, your worst nightmares"""
     # EXERCISE 1
-    neighbors = get_neigh(XTrain, XTest, m)
+    neighbors = get_neigh(XTrain, XTest, 1)
     predictions = predict(neighbors, YTrain)
     accuracy = get_accuracy(neighbors, predictions, YTest)
     print 'The accuracy score of the classifier on the test set, with k=1 is: ' + str(accuracy)
-    # k_best_found = cross_validation(num_folds, XTrain, YTrain, k_list, k_best_val, c_error_val)[0]
-    # class_error_found = cross_validation(num_folds, XTrain, YTrain, k_list, k_best_val, c_error_val)[1]
-    # print 'The best k is %d with classification error of %.10f' % (k_best_found, class_error_found)
+    k_best_found = cross_validation(num_folds, XTrain, YTrain, k_list, k_best_val, c_error_val)[0]
+    class_error_found = cross_validation(num_folds, XTrain, YTrain, k_list, k_best_val, c_error_val)[1]
+    print 'The best k is %d with classification error of %.10f' % (k_best_found, class_error_found)
 
     # EXERCISE 3
     k_best = 3
-    neighbors_k_best = get_neigh(XTrain, XTest, k_best)
+    neighbors_k_best = get_neigh(XTrain, XTest, k_best_found)
     predictions_k_best = predict(neighbors_k_best, YTrain)
     accuracy_k_best = get_accuracy(neighbors_k_best, predictions_k_best, YTest)
     print 'The accuracy score of classifier on the test set, with k_best=3 is: ' + str(accuracy_k_best)
 
     # EXERCISE 4 - normalization
-    mean_XTest = np.mean(XTest, axis=0)
-    mean_XTrain = np.mean(XTrain, axis=0)
-    centered_x_test = XTest - mean_XTest
-    centered_x_train = XTrain - mean_XTrain
-    normalized_xtrain = centered_x_train.std(axis=1)
-    normalized_xtest = centered_x_test.std(axis=1)
-    print len(normalized_xtrain)
-    print len(normalized_xtest)
+    mean_x_train = np.mean(XTrain, axis=0)
+    standard_dev_x_train = XTrain.std(axis=0)
 
-    neighbors_k_best_n = get_neigh(normalized_xtrain, normalized_xtest, k_best)
+    normalized_x_train = (XTrain - mean_x_train) / standard_dev_x_train
+    normalized_x_test = (XTest - mean_x_train) / standard_dev_x_train
+    # k_best_found_norm = cross_validation(num_folds, normalized_x_train, YTrain, k_list, k_best_val, c_error_val)[0]
+    # class_error_found_norm = cross_validation(num_folds, normalized_x_train, YTrain, k_list, k_best_val, c_error_val)[1]
+    # print 'Normalized data -> The best k is %d with classification error of %.10f' % (k_best_found_norm, class_error_found_norm)
+
+    neighbors_k_best_n = get_neigh(normalized_x_train, normalized_x_test, k_best)
     predictions_k_best_n = predict(neighbors_k_best_n, YTrain)
     accuracy_k_best_n = get_accuracy(neighbors_k_best_n, predictions_k_best_n, YTest)
     print 'The accuracy score of classifier on the test set, with k_best=3 is: ' + str(accuracy_k_best_n)
 
-
-
-
-
-
+    # TODO say why accuracy is lower
+    # fit the model
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.metrics import accuracy_score
+    clfN = KNeighborsClassifier(k_best, weights='distance')
+    clfN.fit(normalized_x_train, YTrain)
+    # compute the accuracy on the test set and on the train set
+    accTestN = accuracy_score(YTest, clfN.predict(normalized_x_test))
+    # accTrainN = accuracy_score(YTrain, clfN.predict(normalized_x_train)
+    print 'the accuracy with nuolt in: ' + str(accTestN)
 
 
 if __name__ == "__main__":

@@ -32,6 +32,7 @@ print 'The accuracy score on the test set is %.10f and the accuracy score on the
 
 # PLOT THE DATA
 def dimension_reduction(data_matrix):
+    """This function reduces the dimensionality of the data matrix """
     pca = decomposition.PCA(n_components=3)
     red_matrix = pca.fit_transform(data_matrix)
     return red_matrix
