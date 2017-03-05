@@ -20,7 +20,6 @@ YTest = dataTest[:, -1]
 
 # EXERCISE 1
 n_neighbors = 1
-# TODO say why I use distance instead of uniform
 clf = KNeighborsClassifier(n_neighbors, weights='distance')
 clf.fit(XTrain, YTrain)
 
@@ -41,8 +40,14 @@ fig = plt.figure()
 ax = Axes3D(fig)
 reduced_matrix = dimension_reduction(XTrain)
 ax.scatter(reduced_matrix[:, 0], reduced_matrix[:, 1], reduced_matrix[:, 2],
-           c=['#9999ff' if y == 1 else '#f2983e' for y in YTrain], edgecolor='none')
-# plt.show()
+           c=['#9999ff' if y == 1 else '#f2983e' for y in YTrain], edgecolor='none', label='crop')
+orange_proxy = plt.Rectangle((0, 0), 1, 1, fc="#f2983e")
+violet_proxy = plt.Rectangle((0, 0), 1, 1, fc="#9999ff")
+ax.legend([orange_proxy, violet_proxy], ['weed', 'crop'])
+ax.set_xlabel('feature 1')
+ax.set_ylabel('feature 2')
+ax.set_zlabel('feature 3')
+plt.show()
 
 # EXERCISE 2
 k_list = [i for i in range(0, 26) if i % 2 != 0]
@@ -70,8 +75,7 @@ def perform_cross_validation(klist, kval, cval, x_train, y_train):
         # using only 10 numbers after comma as these are the significant digits
     return kval, cval
 
-k_best_found = perform_cross_validation(k_list, k_best_val, c_error_val, XTrain, YTrain)[0]
-class_error_found = perform_cross_validation(k_list, k_best_val, c_error_val, XTrain, YTrain)[1]
+k_best_found, class_error_found = perform_cross_validation(k_list, k_best_val, c_error_val, XTrain, YTrain)
 
 print 'The best k is %d with classification error of %.10f' % (k_best_found, class_error_found)
 
@@ -85,14 +89,13 @@ print 'The accuracy score of classifier with k_best on the test set is %.10f and
       % (k_best_acc_test, k_best_acc_train)
 
 
-# EXERCISE 4
+# EXERCISE 4 - normalization
 scaler = preprocessing.StandardScaler().fit(XTrain)
 XTrainN = scaler.transform(XTrain)
 XTestN = scaler.transform(XTest)
 
 # perform cross validation
-k_best_found_normalized = perform_cross_validation(k_list, k_best_val, c_error_val, XTrainN, YTrain)[0]
-class_error_found_normalized = perform_cross_validation(k_list, k_best_val, c_error_val, XTrainN, YTrain)[1]
+k_best_found_normalized, class_error_found_normalized = perform_cross_validation(k_list, k_best_val, c_error_val, XTrainN, YTrain)
 print 'The best k found in cross validation procedure is %d with classification error of %.10f' \
       % (k_best_found_normalized, class_error_found_normalized)
 
@@ -106,7 +109,3 @@ accTrainN = accuracy_score(YTrain, clfN.predict(XTrainN))
 
 print 'The accuracy score of classifier with k_best on the test set normalized is %.10f ' \
       'and the accuracy score on the train set normalized is %.10f' % (accTestN, accTrainN)
-
-
-# def distance(a, b):
-#     return np.sqrt(np.power(a[0] - b[0], 2) + np.power(a[1] - b[1], 2))
