@@ -63,7 +63,7 @@ def cross_validation(n_splits, x_train, y_train, klist, kval, cval):
     for k in klist:
         # split the data
         l = []
-        for n in range(num_folds):
+        for n in range(n_splits):
             x_test_cv = x_train[n * subset_size: n * subset_size + subset_size]
             y_test_cv = y_train[n * subset_size:n * subset_size + subset_size]
             x_train_cv = np.concatenate((x_train[:n * subset_size], x_train[(n + 1) * subset_size:]))
