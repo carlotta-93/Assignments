@@ -36,22 +36,23 @@ def pca(data):
 
 
 def main():
-    """This functiont performs the pca on the two dataset and plot the results"""
+    """This function performs the pca on the two dataset and plot the results"""
     # EXERCISE 1.2
-    murder_eig_vals, murder_eig_vect, centered_data = pca(murder_data)
+    murder_eig_values, murder_eig_vectors, centered_data = pca(murder_data)
 
     murder_feature1 = centered_data[:, 0]
     murder_feature2 = centered_data[:, 1]
     mean_cen = np.mean(centered_data, axis=0)
 
-    s0 = np.sqrt(murder_eig_vals[0])
-    s1 = np.sqrt(murder_eig_vals[1])
+    s0 = np.sqrt(murder_eig_values[0])
+    s1 = np.sqrt(murder_eig_values[1])
 
     # plot data
     plt.scatter(mean_cen[0], mean_cen[1], marker='*', c='r', label='mean of the data')
     plt.scatter(murder_feature1, murder_feature2, marker='o', c='orange', label='murder_data points')
-    plt.plot([0, s0*murder_eig_vect[0, 0]], [0, s0*murder_eig_vect[0, 1]], 'b', linewidth=1.3, label='eigenvectors', c='purple')
-    plt.plot([0, s1*murder_eig_vect[1, 0]], [0, s1*murder_eig_vect[1, 1]], 'b', linewidth=1.3, c='purple')
+    plt.plot([0, s0*murder_eig_vectors[0, 0]], [0, s0*murder_eig_vectors[0, 1]], 'b', linewidth=1.3,
+             label='eigenvectors', c='purple')
+    plt.plot([0, s1*murder_eig_vectors[1, 0]], [0, s1*murder_eig_vectors[1, 1]], 'b', linewidth=1.3, c='purple')
 
     plt.grid()
     plt.axis('equal')
