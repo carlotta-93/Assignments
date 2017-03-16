@@ -35,6 +35,7 @@ def pca(data):
     return eig_values, eig_vectors, data_centered
 
 
+
 def main():
     """This function performs the pca on the two dataset and plot the results"""
     # EXERCISE 1.2
