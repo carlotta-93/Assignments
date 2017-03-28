@@ -63,26 +63,35 @@ def k_means(data, k, max_iter):
             classifications[classif].append(elements)
 
         for classif in classifications:
-            # take the avg for all of the values that are in th previous class & redefine the new centroids
+            # take the avg for all of the values that are in the previous class & redefine the new centroids
             centroids[classif] = np.average(classifications[classif], axis=0)
 
     return centroids
 
 centroids_found = k_means(XTrain, num_k, max_iteration)
-centoids_projected = mds(centroids_found.values(), 2)
 
 
+def mds_centroids(data_m, centroids, d):
+    """This function takes as argument the data set, and the centroids found, performs pca on both and
+    returns the centroids projected on the first d principal components of the data set"""
+    _, eig_vect, _ = pca(data_m)  # eigenvectors from the original data set
+    _, _, centered_centroids = pca(centroids)
+    transformed_data = np.dot(eig_vect.T, centered_centroids.T).T
+    return [transformed_data[:, n] for n in range(d)]
+
+centroids_projected = mds_centroids(XTrain, centroids_found.values(), 2)
+# plot the data
 for i in range(len(projected_data[0])):
     if YTrain[i] == 0:
         c0 = plt.scatter(projected_data[0][i], projected_data[1][i], marker='o', c='orange', lw=0.3)
     else:
         c1 = plt.scatter(projected_data[0][i], projected_data[1][i], marker='o', c='violet', lw=0.3)
-    centers = plt.scatter(centoids_projected[0], centoids_projected[1], marker='D', c='green', s=50, lw=0.2)
+    centers = plt.scatter(centroids_projected[0], centroids_projected[1], marker='D', c='green', s=50, lw=0.2)
 plt.axis('equal')
 plt.xlabel('first PC')
 plt.ylabel('second PC')
 plt.title('Projection on first two PCs of weed crop data')
-plt.legend([c0, c1, centers], ['points in class 0', 'points in class 1', 'centroids'], loc='lower right', scatterpoints=1)
+plt.legend([c0, c1, centers], ['weed', 'crop', 'centroids'], loc='lower center', scatterpoints=1)
 plt.show()
 
 

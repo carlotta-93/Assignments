@@ -11,7 +11,8 @@ def plot_cells(cells, title):
     for cell in cells:
         x = cell[::2]
         y = cell[1::2]
-        plt.scatter(x, y, c=blues(i), label='diatom')
+        plt.scatter(x, y, c=blues(i), label='diatom', facecolor='0.5', lw=0.5)
+        plt.plot(x, y, color=blues(i))
         i += 0.2
     plt.axis('equal')
     plt.xlabel('x coordinates')
@@ -27,6 +28,15 @@ def main():
     td_x = third_diatoms_coordinates[::2]
     td_y = third_diatoms_coordinates[1::2]
 
+    third_d = plt.scatter(td_x, td_y, marker='o', c='orange', label='third diatoms', s=10, facecolor='0.5', lw=0.5)
+    thi = plt.plot(td_x, td_y, color='red')
+    plt.axis('equal')
+    plt.xlabel('x coordinates')
+    plt.ylabel('y coordinates')
+    plt.title('Shape of third diatom')
+    plt.legend(loc='lower right')
+    plt.show([third_d, thi])
+
     all_x = []
     all_y = []
     for diatoms in data:
@@ -34,14 +44,13 @@ def main():
         all_y.append(diatoms[1::2])
 
     all_diatoms = plt.scatter(all_x, all_y, marker='o', c='#9999ff', label='all diatoms', s=10, facecolor='0.5', lw=0.5)
-    third_d = plt.scatter(td_x, td_y, marker='o', c='orange', label='third diatoms', s=10, facecolor='0.5', lw=0.5)
     plt.axis('equal')
     plt.xlabel('x coordinates')
     plt.ylabel('y coordinates')
     plt.title('Shape of all diatoms')
     plt.legend(loc='lower right')
-    plt.show(all_diatoms)
-    plt.show(third_d)
+    plt.show([thi, third_d, all_diatoms])
+
 
     # EXERCISE 2
     data_mean = np.mean(data, axis=0)
@@ -76,18 +85,6 @@ def main():
     for i in range(5):
         cells_along_pc3[i, :] = data_mean + (i - 2) * s2 * e2
     plot_cells(cells_along_pc3, title='Variance along the third PC')
-
-
-
-    # plt.axis('equal')
-    # plt.xlabel('x coordinates')
-    # plt.ylabel('y coordinates')
-    # plt.title('Shape of all diatoms')
-    # plt.legend(loc='lower right')
-    # plt.show(first_pt)
-
-
-
 
 
 if __name__ == '__main__':
