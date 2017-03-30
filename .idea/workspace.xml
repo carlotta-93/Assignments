@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37f17af6-63e2-45cb-8021-968a98521302" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/A5/data for assignment 5/redwine_testing.txt" afterPath="$PROJECT_DIR$/A5/redwine_testing.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/A5/data for assignment 5/redwine_training.txt" afterPath="$PROJECT_DIR$/A5/redwine_training.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/carlotta.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/carlotta.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/A5/random_forest.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/A5/data for assignment 5/IDSWeedCropTest.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/A5/data for assignment 5/IDSWeedCropTrain.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/A5/carlotta_porcelli_a5.docx" afterPath="$PROJECT_DIR$/A5/carlotta_porcelli_a5.docx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/A5/linear_regression.py" afterPath="$PROJECT_DIR$/A5/linear_regression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/A5/multivarlinreg.py" afterPath="$PROJECT_DIR$/A5/multivarlinreg.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,6 +30,7 @@
     <SUITE FILE_PATH="coverage/Assignments$linear_regression.coverage" NAME="linear_regression Coverage Results" MODIFIED="1490719122063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/A5" />
     <SUITE FILE_PATH="coverage/Assignments$multivarlinreg.coverage" NAME="multivarlinreg Coverage Results" MODIFIED="1490876615436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/A5" />
     <SUITE FILE_PATH="coverage/Assignments$pca.coverage" NAME="pca Coverage Results" MODIFIED="1489189341223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/A3" />
+    <SUITE FILE_PATH="coverage/Assignments$random_forest.coverage" NAME="random_forest Coverage Results" MODIFIED="1490878882441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/A5" />
     <SUITE FILE_PATH="coverage/Assignments$plotsprova.coverage" NAME="plotsprova Coverage Results" MODIFIED="1487000640455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/A1/Templates Python" />
     <SUITE FILE_PATH="coverage/Assignments$corr.coverage" NAME="corr Coverage Results" MODIFIED="1487287321188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/A1/Templates Python" />
     <SUITE FILE_PATH="coverage/Assignments$k_means.coverage" NAME="k-means Coverage Results" MODIFIED="1489190479607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/A3" />
@@ -41,23 +43,53 @@
     <splitter split-orientation="horizontal" split-proportion="0.71647817">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="multivarlinreg.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/A5/multivarlinreg.py">
+          <file leaf-file-name="k-means.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/A3/k-means.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="159">
-                  <caret line="42" column="39" lean-forward="true" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+                <state relative-caret-position="45">
+                  <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="26" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="random_forest.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/A5/random_forest.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
                   <folding>
-                    <element signature="e#386#404#0" expanded="true" />
+                    <element signature="e#0#18#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="rmse.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="_validation.py" pinned="false" current-in-tab="false">
+            <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/model_selection/_validation.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="138">
+                  <caret line="35" column="4" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="forest.py" pinned="false" current-in-tab="false">
+            <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/ensemble/forest.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="124">
+                  <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="23" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="rmse.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/A5/rmse.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+                <state relative-caret-position="150">
+                  <caret line="10" column="27" lean-forward="true" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -145,7 +177,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>20</find>
       <find>fit</find>
       <find>1.447</find>
       <find>2.54100000</find>
@@ -175,6 +206,7 @@
       <find>centroids</find>
       <find>max_iter</find>
       <find>max_iteration</find>
+      <find>predict</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -200,6 +232,7 @@
         <option value="$PROJECT_DIR$/A5/linear_regression.py" />
         <option value="$PROJECT_DIR$/A5/rmse.py" />
         <option value="$PROJECT_DIR$/A5/multivarlinreg.py" />
+        <option value="$PROJECT_DIR$/A5/random_forest.py" />
       </list>
     </option>
   </component>
@@ -293,25 +326,7 @@
       <recent name="$PROJECT_DIR$/A5" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.multivarlinreg">
-    <configuration default="false" name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/A3" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Assignments" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/A3/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.random_forest">
     <configuration default="false" name="clustering2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -380,6 +395,24 @@
       <module name="Assignments" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../MachineLearning/Assignments/A2/linear_regression.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="random_forest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/A5" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Assignments" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/A5/random_forest.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -694,19 +727,19 @@
       <item index="2" class="java.lang.String" itemvalue="Python.corr" />
       <item index="3" class="java.lang.String" itemvalue="Python.meanFEV1" />
       <item index="4" class="java.lang.String" itemvalue="Python.assignment2" />
-      <item index="5" class="java.lang.String" itemvalue="Python.test (1)" />
-      <item index="6" class="java.lang.String" itemvalue="Python.clustering2" />
-      <item index="7" class="java.lang.String" itemvalue="Python.linear_regression" />
-      <item index="8" class="java.lang.String" itemvalue="Python.multivarlinreg" />
-      <item index="9" class="java.lang.String" itemvalue="Python.linear_regression (1)" />
+      <item index="5" class="java.lang.String" itemvalue="Python.clustering2" />
+      <item index="6" class="java.lang.String" itemvalue="Python.linear_regression" />
+      <item index="7" class="java.lang.String" itemvalue="Python.multivarlinreg" />
+      <item index="8" class="java.lang.String" itemvalue="Python.linear_regression (1)" />
+      <item index="9" class="java.lang.String" itemvalue="Python.random_forest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.multivarlinreg" />
-        <item index="1" class="java.lang.String" itemvalue="Python.linear_regression (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.linear_regression" />
-        <item index="3" class="java.lang.String" itemvalue="Python.clustering2" />
-        <item index="4" class="java.lang.String" itemvalue="Python.test (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.random_forest" />
+        <item index="1" class="java.lang.String" itemvalue="Python.multivarlinreg" />
+        <item index="2" class="java.lang.String" itemvalue="Python.linear_regression (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Python.linear_regression" />
+        <item index="4" class="java.lang.String" itemvalue="Python.clustering2" />
       </list>
     </recent_temporary>
   </component>
@@ -794,27 +827,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/preprocessing/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/neighbors/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="254" column="0" lean-forward="false" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/neighbors/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="40" column="66" lean-forward="false" selection-start-line="40" selection-start-column="66" selection-end-line="40" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A1/Templates Python/meanFEV1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -868,6 +880,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
           <caret line="111" column="4" lean-forward="false" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -875,13 +888,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-710">
           <caret line="353" column="32" lean-forward="false" selection-start-line="353" selection-start-column="32" selection-end-line="353" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/A2/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="50" column="11" lean-forward="false" selection-start-line="50" selection-start-column="11" selection-end-line="52" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1011,14 +1017,6 @@
     <entry file="file://$PROJECT_DIR$/A3/msd.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/A3/k-means.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/A4/diatoms_plots.py">
@@ -1168,21 +1166,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/A5/rmse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="27" lean-forward="true" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A3/k-means.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/A5/multivarlinreg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="42" column="39" lean-forward="true" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
             <element signature="e#386#404#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/A5/rmse.py">
+    <entry file="file://$PROJECT_DIR$/A2/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="11" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/model_selection/_validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="35" column="4" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/ensemble/forest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/A5/random_forest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

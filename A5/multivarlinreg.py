@@ -7,6 +7,7 @@
 import numpy as np
 from rmse import rmse
 
+
 data_train = np.loadtxt('redwine_training.txt')
 data_test = np.loadtxt('redwine_testing.txt')
 
@@ -51,4 +52,5 @@ for points in x_test_matrix:
 
 print 'The rmse for one feature test set is: %f' % rmse(predictions_one_feat, YTest)
 print 'The rmse for all features test set is: %f' % rmse(predictions_all_feat, YTest)
+
 
