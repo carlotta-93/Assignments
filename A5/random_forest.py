@@ -16,3 +16,4 @@ predictions = rf_clf.predict(XTest)
 accuracy_score = accuracy_score(YTest, predictions)
 
 print 'The accuracy score for the test set is: %f' % accuracy_score
+
