@@ -27,7 +27,7 @@ def multivarlinreg(X, y):
     coefficients = np.dot(pseudo_inverse, y)
     return coefficients
 
-# append list of ones to matrix
+# append list of ones to matrices
 x_train_matrix = np.concatenate((np.ones((len(XTrain), 1)), XTrain), axis=1)
 x_test_matrix = np.concatenate((np.ones((len(XTest), 1)), XTest), axis=1)
 
